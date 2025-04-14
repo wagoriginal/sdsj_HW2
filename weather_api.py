@@ -1,5 +1,6 @@
 import requests
 
+
 class WeatherFetcher:
     def __init__(self, api_key):
         self.base_url = "https://api.waqi.info/feed/{}/?token={}"
