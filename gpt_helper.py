@@ -3,7 +3,7 @@ from openai import OpenAI
 # model="deepseek/deepseek-v3-base:free"
 
 client = OpenAI(
-    api_key="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",
+    api_key="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",
     base_url="https://openrouter.ai/api/v1"
 )
 
@@ -17,7 +17,7 @@ def get_advice_from_openrouter(weather_text):
     """
     try:
         response = client.chat.completions.create(
-            model="deepseek/deepseek-chat-v3-0324:free",
+            model="qwen/qwen-2.5-vl-7b-instruct",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content.strip()

@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
 import requests
-from datetime import datetime
-from gpt_helper import get_advice_from_openrouter  # 你已有的 GPT 接口模块
+from gpt_helper import get_advice_from_openrouter
 
-WEATHER_API_KEY = "3dae6110dc194587b7e31855251404"  # ✅ 替换为你自己的 key
+WEATHER_API_KEY = "3dae6110dc194587b7e31855251404"
 
 
 def get_week_forecast(city):
@@ -47,6 +46,7 @@ def show_forecast_window():
     root = tk.Tk()
     root.title("📅 一周天气预报")
     root.geometry("650x500")
+    root.configure(bg="#EAF6FF")
 
     # ✅ 居中窗口（推荐加在每个界面）
     screen_width = root.winfo_screenwidth()
@@ -54,26 +54,33 @@ def show_forecast_window():
     x = (screen_width // 2) - (650 // 2)
     y = (screen_height // 2) - (500 // 2)
     root.geometry(f"650x500+{x}+{y}")
-    root.configure(bg="#EAF6FF")
 
-    tk.Label(root, text="未来7天天气预测", font=("Helvetica", 18, "bold"),
-             bg="#EAF6FF", fg="#0A3D62").pack(pady=15)
+    header_label = tk.Label(root, text="未来7天天气预测", font=("Helvetica", 18, "bold"),
+                            bg="#EAF6FF", fg="#0A3D62")
+    header_label.pack(pady=15)
 
     input_frame = tk.Frame(root, bg="#EAF6FF")
-    input_frame.pack()
+    input_frame.pack(pady=10)
 
-    tk.Label(input_frame, text="请输入城市名（拼音/英文/中文）:", font=("Arial", 12), bg="#EAF6FF").grid(row=0, column=0)
+    # Improved label and entry with padding
+    city_label = tk.Label(input_frame, text="请输入城市名（拼音/英文）:", font=("Arial", 12), bg="#EAF6FF")  # 中文不稳定
+    city_label.grid(row=0, column=0, padx=10)
     city_entry = tk.Entry(input_frame, font=("Arial", 12), width=25)
     city_entry.grid(row=0, column=1, padx=10)
     city_entry.focus()
 
-    forecast_text = tk.Text(root, height=10, font=("Courier", 11), bg="white")
+    # Button styling
+    query_button = tk.Button(root, text="📅 查询一周天气", font=("Arial", 14, "bold"), bg="#2D9CDB", fg="white",
+                             relief="raised", command=lambda: query_forecast(city_entry, forecast_text, advice_text))
+    query_button.pack(pady=10)
+
+    forecast_text = tk.Text(root, height=10, font=("Courier", 11), bg="white", wrap=tk.WORD)
     forecast_text.pack(padx=20, pady=10, fill=tk.BOTH)
 
-    advice_text = tk.Text(root, height=7, font=("Courier", 11), bg="white")
+    advice_text = tk.Text(root, height=7, font=("Courier", 11), bg="white", wrap=tk.WORD)
     advice_text.pack(padx=20, pady=5, fill=tk.BOTH)
 
-    def query_forecast():
+    def query_forecast(city_entry, forecast_text, advice_text):
         city = city_entry.get().strip()
         if not city:
             messagebox.showwarning("输入错误", "请输入城市名")
@@ -105,6 +112,8 @@ def show_forecast_window():
             advice_text.insert(tk.END, suggestion)
             advice_text.config(state=tk.DISABLED)
 
-    tk.Button(root, text="📅 查询一周天气", font=("Arial", 12), command=query_forecast).pack(pady=10)
-    root.bind("<Return>", lambda event: query_forecast())
+    # Enhance window behavior
+    root.bind("<Return>", lambda event: query_forecast(city_entry, forecast_text, advice_text))
+
+    # Run application
     root.mainloop()

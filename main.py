@@ -6,7 +6,6 @@ from weather_api import WeatherFetcher
 from gpt_helper import get_advice_from_openrouter
 from PIL import Image, ImageTk
 
-# 替换成你的AQICN token
 API_TOKEN = '1645f94d966773652898a4b91f13a5494f2c97e9'
 
 
