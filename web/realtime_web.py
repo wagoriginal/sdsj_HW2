@@ -14,7 +14,7 @@ def realtime_weather_app():
     clear()
     put_markdown("## ☀️ 实时天气查询")
     put_html('<hr>')
-    city = input("🌍 请输入城市名（拼音/英文）:")
+    city = input("🌍 请输入城市名（拼音/英文/中文）:")
 
     fetcher = WeatherFetcher(API_TOKEN)
     data = fetcher.get_weather(city)

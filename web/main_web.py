@@ -5,6 +5,7 @@ from pywebio import start_server
 from realtime_web import realtime_weather_app
 from forecast_web import forecast_weather_app
 
+
 def main():
     clear()
     put_markdown("## 🌤 WeatherNow 智能天气助手")
@@ -21,6 +22,7 @@ def main():
         realtime_weather_app()
     elif action == "forecast":
         forecast_weather_app()
+
 
 if __name__ == '__main__':
     start_server(main, port=8080, debug=True)

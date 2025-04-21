@@ -14,7 +14,7 @@ def forecast_weather_app():
     put_markdown("### 📅 **一周天气预报**")
     put_html('<hr>')
 
-    city = input("🌍 请输入城市名（拼音 / 英文 / 中文均可）：")
+    city = input("🌍 请输入城市名（拼音 / 英文 ）：")
     put_markdown(f"#### 📍 正在查询 {city} 的未来7天天气...")
 
     url = f"https://api.weatherapi.com/v1/forecast.json?key={WEATHER_API_KEY}&q={city}&days=7&lang=zh"

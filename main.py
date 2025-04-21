@@ -142,7 +142,7 @@ if __name__ == "__main__":
     splash.geometry(f"400x250+{x}+{y}")
 
     # 加载背景图
-    bg_image = Image.open("splash_bg.png").resize((400, 250))
+    bg_image = Image.open("gui/splash_bg.png").resize((400, 250))
     bg_photo = ImageTk.PhotoImage(bg_image)
 
     bg_label = tk.Label(splash, image=bg_photo)
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     canvas = tk.Canvas(splash, width=400, height=250, highlightthickness=0)
     canvas.pack()
 
-    bg_img = ImageTk.PhotoImage(Image.open("splash_bg.png").resize((400, 250)))
+    bg_img = ImageTk.PhotoImage(Image.open("gui/splash_bg.png").resize((400, 250)))
     canvas.create_image(0, 0, anchor="nw", image=bg_img)
 
     canvas.create_text(200, 60, text="🌤 WeatherNow", fill="black", font=("Helvetica", 22, "bold"))

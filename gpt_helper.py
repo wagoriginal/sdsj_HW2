@@ -17,7 +17,7 @@ def get_advice_from_openrouter(weather_text):
     """
     try:
         response = client.chat.completions.create(
-            model="qwen/qwen-2.5-vl-7b-instruct",
+            model="deepseek/deepseek-r1-distill-qwen-32b:free",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content.strip()
